@@ -2,5 +2,8 @@ import { createApp } from 'vue';
 import App from './App.vue';
 import router from './router';
 import './assets/styles.css';
-createApp(App).use(router).mount('#app');
+import { useAuthStore } from './store/authStore';
+const app = createApp(App);
+app.use(router).mount('#app');
+useAuthStore().initAuth();
 //# sourceMappingURL=main.js.map

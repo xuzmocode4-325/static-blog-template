@@ -1,11 +1,13 @@
 ﻿<template>
   <div class="bg-white px-6 py-32 lg:px-8 dark:bg-gray-900">
     <div class="mx-auto max-w-3xl text-base/7 text-gray-700 dark:text-gray-300">
-      <p class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">{{ category }}</p>
+      <p class="text-base/7 font-semibold text-indigo-600 dark:text-indigo-400">{{ subtitle }}</p>
       <h1 class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-gray-900 sm:text-5xl dark:text-white">{{ postTitle }}</h1>
       <p class="mt-6 text-xl/8">{{ postExcerpt }}</p>
       <div v-if="post" class="mt-10 max-w-2xl text-gray-600 dark:text-gray-400">
-        <p>{{ paragraphOne }}</p>
+        <div class="prose prose-slate dark:prose-invert">
+          <div v-html="postContent"></div>
+        </div>
         <ul role="list" class="mt-8 max-w-xl space-y-8 text-gray-600 dark:text-gray-400">
           <li class="flex gap-x-3">
             <CheckCircleIcon class="mt-1 size-5 flex-none text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
@@ -74,7 +76,7 @@ const formattedDate = computed(() => {
 const subtitle = computed(() => (post.value?.category ? `Introducing ${post.value.category}` : 'Introducing'));
 const postTitle = computed(() => post.value?.title ?? 'Loading post...');
 const postExcerpt = computed(() => post.value?.excerpt ?? 'Fetching blog content from the API.');
-const paragraphOne = computed(() => post.value?.content ?? 'Content is loading or unavailable at this time.');
+const postContent = computed(() => post.value?.content ?? '<p>Content is loading or unavailable at this time.</p>');
 const paragraphTwo = computed(() => post.value ? `${post.value.author} shares a concise take on ${post.value.title}, with practical examples and tips for readers.` : 'Loading additional information...');
 const paragraphThree = computed(() => post.value ? `Id orci tellus laoreet id ac. Dolor, aenean leo, ac etiam consequat in. ${post.value.authorRole ?? 'This post'} is designed to help you understand the main topic quickly.` : 'Loading expert guidance...');
 const paragraphFour = computed(() => post.value ? 'Faucibus commodo massa rhoncus, volutpat. Dignissim sed eget risus enim. Mattis mauris semper sed amet vitae sed turpis id.' : 'Waiting for content...');
